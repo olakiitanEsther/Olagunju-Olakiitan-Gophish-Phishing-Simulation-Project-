@@ -1,83 +1,94 @@
-# Simple Phishing Test Project with GoPhish
+# GoPhish Cybersecurity Project: Phishing Simulation Lab
 
-This project shows how to install, set up, and test a phishing simulation using GoPhish on Kali Linux. We used a safe testing email and a virtual inbox tool called Mailtrap to test everything safely without using any real personal information.
+This project demonstrates how to set up and execute a safe, controlled phishing simulation using the GoPhish framework on Kali Linux. The goal of this lab is to understand how credential-harvesting attacks work so we can build better corporate security defenses.
 
-## 🚀 My Test Environment
-* **Attacker Machine:** Kali Linux VM (Running GoPhish)
-* **Target Email:** A fresh Proton Mail account (`projecttestuser1@proton.me`)
-* **Safe Mail Carrier:** Mailtrap Sandbox (To send and catch the emails safely)
+## 🚀 Lab Infrastructure
+* **Simulation Platform:** GoPhish Framework (Running on Kali Linux VM)
+* **Target Receiver Account:** Secure Proton Mail (`projecttestuser1@proton.me`)
+* **Safe Mail Gateway:** Mailtrap SMTP Sandbox (Used to safely route testing emails without risking personal accounts)
 
 ---
 
-## 🛠️ Commands I Used
+## 🛠️ Step-by-Step Implementation
 
-Open the terminal in Kali Linux and run these commands step-by-step:
+Open your Kali Linux terminal and run the following commands to install and start the framework:
 ```bash
-# 1. Update your Kali Linux system
+# Update the local software packages
 sudo apt update
 
-# 2. Install GoPhish automatically
+# Install the native GoPhish package
 sudo apt install gophish -y
 
-# 3. Start the GoPhish server
+# Start the simulation framework server
 sudo gophish
 ```
 
 ---
 
-## 📸 Project Pictures (Evidence)
+## 📸 Project Evidence & Screenshots
 
-Please put your saved project pictures inside the spaces below:
-
----
-### Picture 1: GoPhish Dashboard Home Screen
-* **What picture goes here:** The very first screen you saw right after logging into GoPhish with the username `admin` and password `kali-gophish`. It shows an empty homepage.
-<!-- PUT PICTURE 1 HERE -->
-
+Here is the visual proof of the working lab setup:
 
 ---
-### Picture 2: Email Template Setup
-* **What picture goes here:** The screen where you typed the email body text about the "Unusual sign-in activity detected from Lagos, Nigeria" and added the `{{.URL}}` link.
-<!-- PUT PICTURE 2 HERE -->
-
-
----
-### Picture 3: Fake Landing Login Page
-* **What picture goes here:** The screen where you pasted the HTML code for the login boxes and checked the "Capture Credentials" and "Capture Passwords" boxes.
-<!-- PUT PICTURE 3 HERE -->
-
+### Phase 1: GoPhish Administrative Dashboard Overview
+*Initial system verification and landing screen.*
+![Dashboard Overview](Gophish%20Dashboard%201.jpeg)
 
 ---
-### Picture 4: Sending Profile Settings
-* **What picture goes here:** The screen where you pasted your Mailtrap host name, username, and password strings so GoPhish could connect to Mailtrap.
-<!-- PUT PICTURE 4 HERE -->
-
+### Phase 2: Scenario Design (Email Template)
+*Creating the urgent security alert email using the tracking link tags.*
+![Email Template](Email%20Templates%202.jpeg)
 
 ---
-### Picture 5: Final Campaign Results (The Best Proof!)
-* **What picture goes here:** Your final dashboard screenshot showing the 4 colored circles filled with the number 1. It shows that the email was successfully Sent, Opened, Clicked, and that data was Submitted!
-<!-- PUT PICTURE 5 HERE -->
+### Phase 3: Fake Login Interface (Landing Page)
+*The custom HTML verification page designed to record test credentials.*
+![Landing Page 1](landing%20page%201.jpeg)
+![Landing Page 2](lnding%20page%202.jpeg)
 
+---
+### Phase 4: Delivery Gateway & Campaign Settings
+*Connecting GoPhish to Mailtrap and launching the test campaign.*
+![Mailtrap Setup](mailtrap.jpeg)
+![Campaign Configuration](campaign%20configuration.jpeg)
+
+---
+### Phase 5: Live Campaign Results (Final Proof)
+*Real-time analytics showing successful delivery, opening, link interaction, and credential submission.*
+![Campaign Result](campaign%20Result.jpeg)
 
 ---
 
-## ⚠️ Problems I Faced and How I Fixed Them
+## ⚠️ Technical Challenges & Solutions
 
-### 1. Tuta Account Hold Problem
-* **The Problem:** I tried to make a free account on Tuta email, but their system locked me out for 48 hours for safety.
-* **The Fix:** I changed my plan and made a free account on **Proton Mail** instead, which let me log in immediately using a quick picture puzzle.
+### 1. Webmail Registration Restrictions
+* **Challenge:** My initial test target account was flagged by automated spam controls, causing a 48-hour hold.
+* **Solution:** Pivoted immediately to **Proton Mail**, which allowed instant registration via basic image CAPTCHA verification.
 
-### 2. Normal Email Accounts Blocking GoPhish
-* **The Problem:** Standard email services like Gmail or Yahoo block automated phishing test emails immediately and suspend your account.
-* **The Fix:** I signed up for a free tool called **Mailtrap**. It gave me safe fake login codes to put into GoPhish so my emails would send smoothly.
+### 2. Standard Mail Server Blocks
+* **Challenge:** Normal public email servers block automated simulation emails containing words like "unusual sign-in activity" to prevent platform abuse.
+* **Solution:** Utilized **Mailtrap Sandbox** as an isolated SMTP gateway. This allowed GoPhish to deliver the test email into a safe environment without account suspensions.
 
-### 3. Link Not Loading ("Site Can't Be Reached")
-* **The Problem:** When I clicked the phishing test link on my normal computer browser, the page did not load. This happened because the link was looking inside my normal PC instead of inside the Kali VM.
-* **The Fix:** I logged into Mailtrap **inside my Kali Linux browser** instead. When I clicked the link inside Kali, the fake login screen loaded perfectly.
+### 3. Loopback Localhost Error
+* **Challenge:** Clicking the tracking link from my host computer's browser caused a network timeout error because the address resolved locally to `127.0.0.1`.
+* **Solution:** Opened the Mailtrap dashboard browser session directly inside the **Kali Linux VM**. This allowed the loopback address to connect seamlessly to the listening GoPhish server.
 
-### 4. Why "Email Reported" Was Zero (0)
-* **The Problem:** I noticed the "Email Reported" metric on the final dashboard stayed at 0, and I wanted to make sure nothing was broken.
-* **The Fix:** This is completely correct! The circle stays at 0 because our basic email template did not have a special report button hooked up to it. It shows that our test target fell for the trick and did not report the email.
+### 4. Zero (0) Email Reported Metric Explanation
+* **Challenge:** The final results screen showed zero reports, which could look like a system bug.
+* **Solution:** This is correct behavior. Standard mail clients require specific reporting plugins. The zero status simply proves that the target user fully trusted the phishing lure.
 
 ---
-*Disclaimer: This project was made strictly for school work and legal learning purposes. No real people were phished.*
+
+## 🛡️ Strategic Security Takeaways
+* **Pretexting Sophistication:** High-quality alert designs make it very easy to trick users, showing why we need strong user awareness training.
+* **Defensive Tracking:** The lack of automated reporting during this test underscores why organizations must give users an easy "Report Phishing" button.
+* **Technical Controls:** Strong multi-factor authentication (MFA) remains the best defense to stop attackers from using stolen static passwords.
+
+---
+
+## 🎓 About the Author
+* **Name:** Olagunju Olakiitan Esther
+* **Role:** Cybersecurity Graduate Intern
+* **Connect with me:** [My LinkedIn Profile:https://www.linkedin.com/in/olagunju-olakiitan/)
+
+---
+*Disclaimer: This repository is intended strictly for authorized educational research and laboratory practice. No real targets were phished or harmed during this simulation loop.*
